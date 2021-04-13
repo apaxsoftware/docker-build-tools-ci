@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM circleci/php:7.3-node-browsers
+FROM circleci/php:7.4-node-browsers
 
 # Switch to root user
 USER root
@@ -22,8 +22,13 @@ RUN apt-get update && \
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-install intl
 
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
-RUN docker-php-ext-install gd
+RUN pecl config-set php_ini /usr/local/etc/php/php.ini && \
+    pear config-set php_ini /usr/local/etc/php/php.ini && \
+    pecl channel-update pecl.php.net
+
+
+RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd
 
 RUN docker-php-ext-configure sodium
 RUN docker-php-ext-install sodium
@@ -58,7 +63,7 @@ RUN gem install circle-cli
 RUN composer selfupdate
 
 # Parallel Composer downloads
-RUN composer -n global require -n "hirak/prestissimo:^0.3"
+# RUN composer -n global require -n "hirak/prestissimo:^0.3"
 
 # Create an unpriviliged test user
 RUN groupadd -g 999 tester && \
@@ -98,7 +103,7 @@ RUN composer -n create-project --no-dev -d /usr/local/share/terminus-plugins pan
 RUN curl -LO https://github.com/github/hub/releases/download/v2.11.2/hub-linux-amd64-2.11.2.tgz && tar xzvf hub-linux-amd64-2.11.2.tgz && ln -s /build-tools-ci/hub-linux-amd64-2.11.2/bin/hub /usr/local/bin/hub
 
 # Add lab in case anyone wants to automate GitLab MR creation, etc.
-RUN curl -s https://raw.githubusercontent.com/zaquestion/lab/master/install.sh | bash
+# RUN curl -s https://raw.githubusercontent.com/zaquestion/lab/master/install.sh | bash
 
 # Add phpcs for use in checking code style
 RUN mkdir ~/phpcs && cd ~/phpcs && COMPOSER_BIN_DIR=/usr/local/bin composer require squizlabs/php_codesniffer:^2.7

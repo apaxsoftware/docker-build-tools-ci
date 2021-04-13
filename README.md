@@ -1,12 +1,12 @@
 # Docker Build Tools CI
 
-[![docker pull quay.io/pantheon-public/build-tools-ci](https://img.shields.io/badge/image-quay-blue.svg)](https://quay.io/repository/pantheon-public/build-tools-ci)
+[![docker pull apax/build-tools](https://img.shields.io/badge/dockerhub-image-blue.svg?logo=Docker)](https://hub.docker.com/repository/docker/apax/build-tools)
 
-This is the source Dockerfile for the [pantheon-public/build-tools-ci](https://quay.io/repository/pantheon-public/build-tools-ci) docker image.
+This is the source Dockerfile for the [apax/build-tools](https://hub.docker.com/repository/docker/apax/build-tools) docker image.
 
 ## Image Contents
 
-- [CircleCI PHP 7.3, Node, Headless browser Docker base image](https://hub.docker.com/r/circleci/php)
+- [CircleCI PHP 7.4, Node, Headless browser Docker base image](https://hub.docker.com/r/circleci/php)
 - [Terminus](https://github.com/pantheon-systems/terminus)
 - Terminus plugins
   - [Terminus Build Tools Plugin](https://github.com/pantheon-systems/terminus-build-tools-plugin)
