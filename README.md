@@ -1,15 +1,12 @@
 # Docker Build Tools CI
 
-[![docker pull quay.io/pantheon-public/build-tools-ci](https://img.shields.io/badge/image-quay-blue.svg)](https://quay.io/repository/pantheon-public/build-tools-ci)
-[![Actively Maintained](https://img.shields.io/badge/Pantheon-Actively_Maintained-yellow?logo=pantheon&color=FFDC28)](https://pantheon.io/docs/oss-support-levels#actively-maintained-support)
+[![docker pull apax/build-tools](https://img.shields.io/badge/dockerhub-image-blue.svg?logo=Docker)](https://hub.docker.com/repository/docker/apax/build-tools)
 
-[![Docker Hub pantheonpublic/build-tools-ci](https://img.shields.io/docker/pulls/pantheonpublic/build-tools-ci)](https://hub.docker.com/repository/docker/pantheonpublic/build-tools-ci)
-
-This is the source Dockerfile for the [pantheon-public/build-tools-ci](https://quay.io/repository/pantheon-public/build-tools-ci) and [pantheonpublic/build-tools-ci](https://hub.docker.com/repository/docker/pantheonpublic/build-tools-ci) docker image.
+This is the source Dockerfile for the [apax/build-tools](https://hub.docker.com/repository/docker/apax/build-tools) docker image.
 
 ## Image Contents
 
-- [CircleCI PHP 7.3, Node, Headless browser Docker base image](https://hub.docker.com/r/circleci/php)
+- [CircleCI PHP 7.4/8.1, Node, Headless browser Docker base image](https://hub.docker.com/r/circleci/php)
 - [Terminus](https://github.com/pantheon-systems/terminus)
 - Terminus plugins
   - [Terminus Build Tools Plugin](https://github.com/pantheon-systems/terminus-build-tools-plugin)
@@ -33,14 +30,8 @@ This is the source Dockerfile for the [pantheon-public/build-tools-ci](https://q
 
 ## Branches
 
-- 8.x: Use a CircleCI base image with Node JS, composer 2 and Terminus 3. Produces 8.x-php7.4, 8.x-php8.0, 8.x-php8.1, 8.x-php8.2 and 8.x-php8.3 image tags.
-- 7.x: Use a CircleCI base image with Node JS and composer 2. Produces 7.x-php7.3, 7.x-php7.4 and 7.x-php8.0 image tags.
-- 6.x: Use a CircleCI base image with Node JS (No longer maintained)
-- 5.x: Don't create multidevs when commits are made to the default branch, instead working directly on the dev environment (No longer maintained)
-- 4.x: Terminus 2.x and Build Tools 2.x (No longer maintained)
-- 3.x: Deprecated: Terminus 1 with Build Tools 2.0.0-beta2 (No longer maintained)
-- 2.x: Terminus 1.x and Build Tools 1.x (No longer maintained)
-- 1.x: Deprecated (No longer maintained)
+- 8.x: Most recent form of pantheon. Produces php7.4, php8.1, php8.2, php8.3 image tags.
+- 6.x: Older deprecated fork of pantheon
 
 ## 8.x Docker images
 
@@ -51,29 +42,17 @@ From project root:
 ```
 # PHPVERSION could be 7.4, 8.0, 8.1, 8.2 or 8.3.
 PHPVERSION=7.4
-docker build --build-arg PHPVERSION=$PHPVERSION -t quay.io/pantheon-public/build-tools-ci:8.x-php${PHPVERSION} .
-```
-
-## 7.x Docker images
-
-### Building the image
-
-From project root:
-
-```
-# PHPVERSION could be 7.3, 7.4 or 8.0.
-PHPVERSION=7.4
-docker build --build-arg PHPVERSION=$PHPVERSION -t quay.io/pantheon-public/build-tools-ci:7.x-php${PHPVERSION} .
+docker build --build-arg PHPVERSION=$PHPVERSION -t apax/build-tools:php${PHPVERSION} .
 ```
 
 ### Using the image
 
 #### Image name and tag
 
-- quay.io/pantheon-public/build-tools-ci:8.x-php7.4
-- quay.io/pantheon-public/build-tools-ci:8.x-php8.0
-- quay.io/pantheon-public/build-tools-ci:8.x-php8.1
-- quay.io/pantheon-public/build-tools-ci:8.x-php8.2
+- apax/build-tools:php7.4
+- apax/build-tools:php8.1
+- apax/build-tools:php8.2
+- apax/build-tools:php8.3
 
 #### Usage example
 
